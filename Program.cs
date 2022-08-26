@@ -1,49 +1,127 @@
 ﻿Random rd = new Random();
-int input;
 
-//Zadacha 10:
-Console.WriteLine("Zadacha 10");
-Console.WriteLine(input = rd.Next(100, 1000));
-input = (input / 10) % 10;
-Console.WriteLine(input);
+/////Задача 19/////
+string palindrom5x()
+{
+    int input;
+    Console.WriteLine(input = rd.Next(10000, 100000));
 
-//Zadacha 13:
-Console.WriteLine("Zadacha 13");
-Console.WriteLine(input = rd.Next(1, 200));
-if (input > 99)
-{
-    Console.WriteLine(input = (input / 100) % 10);
-}
-else
-{
-    Console.WriteLine("третьей цифры нет");
-}
-
-
-//Zadacha 15
-Console.WriteLine("Zadacha 15");
-Console.WriteLine(input = rd.Next(-10, 11));
-if (input > 5 || input < 8)
-{
-    Console.WriteLine("нет");
-}
-else
-{
-    if (input == 2 || input == 7) { Console.WriteLine("да"); }
+    //Console.WriteLine(input / 10000 == input % 10);
+    if (input / 10000 == input % 10 &
+        (input / 1000) % 10 == (input % 100) / 10)
+    {
+        return("Да");
+    }
+    else
+    {
+        return("Нет");
+    }
 }
 
-//задача необязательная.
-Console.WriteLine("задача необязательная.");
-Console.WriteLine("Введите кол-во программистов: ");
-int programmer_count = Convert.ToInt32(Console.ReadLine());
-string end = "";
-if (programmer_count % 10 > 1 & programmer_count % 10 < 5)
+try
 {
-    end = "а";
+    Console.WriteLine("Zadacha 19");
+    Console.WriteLine(palindrom5x());
 }
-if (programmer_count % 10 > 4 || programmer_count % 10 < 1
-    || programmer_count % 100 > 10 & programmer_count % 100 < 21)
+catch
 {
-    end = "ов";
+    Console.Write("Надо было вводить числа");
 }
-Console.Write($"{programmer_count} программист{end}");
+
+/////Задача 21/////
+double Distance3d()
+{
+    double[] coords = new double[6];
+    double giveOtvetDoub(string message)
+    {
+        Console.Write(message);
+        return Convert.ToDouble(Console.ReadLine());
+    }
+    coords[0] = giveOtvetDoub("Введите координату x ");
+    coords[1] = giveOtvetDoub("Введите координату y ");
+    coords[2] = giveOtvetDoub("Введите координату z ");
+    coords[3] = giveOtvetDoub("Введите координату x ");
+    coords[4] = giveOtvetDoub("Введите координату y ");
+    coords[5] = giveOtvetDoub("Введите координату z ");
+    double res = Math.Sqrt(
+        (coords[0] - coords[3]) * (coords[0] - coords[3])
+        + (coords[1] - coords[4]) * (coords[1] - coords[4])
+        + (coords[2] - coords[5]) * (coords[2] - coords[5]));
+    return res;
+}
+
+try
+{
+    Console.WriteLine("Zadacha 21");
+    Console.WriteLine(Distance3d());
+}
+catch
+{
+    Console.WriteLine("Надо было вводить числа");
+}
+
+/////Задача 23/////
+void SquareTableN()
+{
+    Console.Write("Введите число ");
+    int N = Convert.ToInt32(Console.ReadLine());
+    int[] answer = new int[N];
+    if (N > 0)
+    {
+        for (int i = 1; i < (N + 1); i++)
+        {
+            answer[i - 1] = (i * i * i);
+        }
+    }
+    else
+    {
+        Console.WriteLine("Надо было вводить положительные числа");
+    }
+    var str = string.Join(" ", answer);
+    Console.WriteLine(str);
+}
+
+try
+{
+    Console.WriteLine("Zadacha 23");
+    SquareTableN();
+}
+catch
+{
+    Console.WriteLine("Надо было вводить числа");
+}
+
+/////Задача необязательная/////
+void SquareTableWithSumma()
+{
+    double summa=0; //переменная для цикла по вводу чисел и сложения квадратов из листа
+    List<double> NumbersList = new List<double>();
+    //Создать лист из double для хранения квадратов
+    bool firstStart = true; //переменная для первого старта цикла
+    while (summa != 0 || firstStart==true) //проверить сумму или сделать первый старт
+    {
+        if (firstStart == true) { firstStart = false; } //закрытие возможности для ложных первых стартов
+        NumbersList.Add(Convert.ToDouble(Console.ReadLine())); //Добавить в лист число
+        summa += NumbersList[NumbersList.Count - 1]; 
+        //Добавить число к сумме из листа
+        NumbersList[NumbersList.Count - 1]=
+            NumbersList[NumbersList.Count - 1] *
+            NumbersList[NumbersList.Count - 1]; 
+        //Сделать квадрат числа из листа
+    }
+    for (int i = 0; i < NumbersList.Count; i++) //цикл для создания суммы всех квадратов
+    {
+        summa += NumbersList[i];
+    }
+    Console.WriteLine(summa);
+}
+
+try
+{
+    Console.WriteLine("Задача необязательная");
+    SquareTableWithSumma();
+}
+catch
+{
+    Console.Write("Надо было вводить числа");
+}
