@@ -77,7 +77,6 @@ void createMassiveAndSort()
     bool sort = false; //переменная, которая сообщает нужно ли ещё сортировать или готово
     while (sort == false) //цикл пока не отсортирует
     {
-        bool error = false; //переменная на проверки есть ли ошибки или готово
         for (int i = 1; i < massive.Length; i++) //цикл на весь массив
         {
             if (massive[i] > massive[i - 1]) //замена значений если одно больше другого от большего к меньшему
@@ -85,15 +84,21 @@ void createMassiveAndSort()
                 int newValue = massive[i - 1];
                 massive[i - 1] = massive[i];
                 massive[i] = newValue;
-                if (massive[i] > massive[i - 1]) //проверка значений
-                {
-                    error = true; // если ли есть проблемы, то ставим что ошибка есть
-                }
             }
-            if (error == false) //если ошибок не найдено значит отсортировано
+        }
+
+        bool error = false; //переменная на проверки есть ли ошибки или готово
+        for (int i = 1; i < massive.Length; i++) //цикл на массив
+        {
+            if (massive[i] > massive[i - 1]) //проверка значений
             {
-                sort = true;
+                error = true; // если ли есть проблемы, то ставим что ошибка есть
             }
+        }
+        if (error == false) //если ошибок не найдено значит отсортировано
+        {
+            sort = true;
+        }
     }
     var str = string.Join(", ", massive); //распечатка массива
     Console.WriteLine(str);
