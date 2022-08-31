@@ -1,125 +1,120 @@
-﻿Random rd = new Random();
+﻿//Задача 25: Напишите цикл,
+//который принимает на вход два числа
+//(A и B) и возводит число A в
+//натуральную степень B.
+//3, 5 -> 243 (3⁵)
+//2, 4-> 16
+Random rd = new Random();
 
-/////Задача 19/////
-string palindrom5x()
+int stepen()
 {
-    int input;
-    Console.WriteLine(input = rd.Next(10000, 100000));
-
-    //Console.WriteLine(input / 10000 == input % 10);
-    if (input / 10000 == input % 10 &
-        (input / 1000) % 10 == (input % 100) / 10)
+    Console.Write("Введите число: ");
+    int input1 = Convert.ToInt32(Console.ReadLine());
+    Console.Write("Введите степень: ");
+    int input2 = Convert.ToInt32(Console.ReadLine());
+    int otvet = 1;
+    for (int i = 0; i < input2; i++)
     {
-        return("Да");
+        otvet = otvet * input1;
     }
-    else
+    return otvet;
+}
+
+//Задача 27: Напишите программу,
+//которая принимает на вход число
+//и выдаёт сумму цифр в числе.
+//452 -> 11
+//82 -> 10
+//9012 -> 12
+
+int summaNumbers()
+{
+    Console.Write("Введите число: ");
+    string str = Console.ReadLine();
+    char[] array = str.ToCharArray();
+    int summa = 0;
+    foreach (char i in array)
     {
-        return("Нет");
+        summa += Convert.ToInt32(char.ToString(i));
     }
+    return summa;
 }
 
-try
-{
-    Console.WriteLine("Zadacha 19");
-    Console.WriteLine(palindrom5x());
-}
-catch
-{
-    Console.Write("Надо было вводить числа");
-}
+//Задача 29: Напишите программу,
+//которая задаёт массив из 8
+//элементов и выводит их на экран.
+//1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
+//6, 1, 33-> [6, 1, 33]
 
-/////Задача 21/////
-double Distance3d()
+void createMassive(int count)
 {
-    double[] coords = new double[6];
-    double giveOtvetDoub(string message)
+    int[] massive = new int[count];
+    for (int i = 0; i < massive.Length; i++)
     {
-        Console.Write(message);
-        return Convert.ToDouble(Console.ReadLine());
+        massive[i] = rd.Next(0, 100);
+        Console.Write($"{massive[i]}, ");
     }
-    coords[0] = giveOtvetDoub("Введите координату x ");
-    coords[1] = giveOtvetDoub("Введите координату y ");
-    coords[2] = giveOtvetDoub("Введите координату z ");
-    coords[3] = giveOtvetDoub("Введите координату x ");
-    coords[4] = giveOtvetDoub("Введите координату y ");
-    coords[5] = giveOtvetDoub("Введите координату z ");
-    double res = Math.Sqrt(
-        (coords[0] - coords[3]) * (coords[0] - coords[3])
-        + (coords[1] - coords[4]) * (coords[1] - coords[4])
-        + (coords[2] - coords[5]) * (coords[2] - coords[5]));
-    return res;
+    Console.WriteLine("");
 }
 
-try
-{
-    Console.WriteLine("Zadacha 21");
-    Console.WriteLine(Distance3d());
-}
-catch
-{
-    Console.WriteLine("Надо было вводить числа");
-}
+//необязательная задача Написать программу
+//сортировки массива от большего к меньшему.
+//Массив задается размерностью N с клавиатуры,
+//далее заполняется случайными целыми числами.
 
-/////Задача 23/////
-void SquareTableN()
+void createMassiveAndSort()
 {
-    Console.Write("Введите число ");
-    int N = Convert.ToInt32(Console.ReadLine());
-    int[] answer = new int[N];
-    if (N > 0)
+    Console.Write("Введите число для установки размера массива: ");
+    int N = Convert.ToInt32(Console.ReadLine()); //Получить N
+    int[] massive = new int[N]; //создать массив размером N
+    for (int i = 0; i < massive.Length; i++) // цикл на весь массив
     {
-        for (int i = 1; i < (N + 1); i++)
+        massive[i] = rd.Next(0, 100); //заполнение случайным числом
+        Console.Write($"{massive[i]}, "); //распечатка элемента массива
+    }
+    Console.WriteLine(""); //отступ так как там был write
+
+    bool sort = false; //переменная, которая сообщает нужно ли ещё сортировать или готово
+    while (sort == false) //цикл пока не отсортирует
+    {
+        for (int i = 1; i < massive.Length; i++) //цикл на весь массив
         {
-            answer[i - 1] = (i * i * i);
+            if (massive[i] > massive[i - 1]) //замена значений если одно больше другого от большего к меньшему
+            {
+                int newValue = massive[i - 1];
+                massive[i - 1] = massive[i];
+                massive[i] = newValue;
+            }
+        }
+
+        bool error = false; //переменная на проверки есть ли ошибки или готово
+        for (int i = 1; i < massive.Length; i++) //цикл на массив
+        {
+            if (massive[i] > massive[i - 1]) //проверка значений
+            {
+                error = true; // если ли есть проблемы, то ставим что ошибка есть
+            }
+        }
+        if (error == false) //если ошибок не найдено значит отсортировано
+        {
+            sort = true;
         }
     }
-    else
-    {
-        Console.WriteLine("Надо было вводить положительные числа");
-    }
-    var str = string.Join(" ", answer);
+    var str = string.Join(", ", massive); //распечатка массива
     Console.WriteLine(str);
 }
 
-try
-{
-    Console.WriteLine("Zadacha 23");
-    SquareTableN();
-}
-catch
-{
-    Console.WriteLine("Надо было вводить числа");
-}
-
-/////Задача необязательная/////
-void SquareTableWithSumma()
-{
-    double summa=0; //переменная для цикла по вводу чисел и сложения квадратов из листа
-    List<double> NumbersList = new List<double>();
-    //Создать лист из double для хранения квадратов
-    bool firstStart = true; //переменная для первого старта цикла
-    while (summa != 0 || firstStart==true) //проверить сумму или сделать первый старт
-    {
-        if (firstStart == true) { firstStart = false; } //закрытие возможности для ложных первых стартов
-        NumbersList.Add(Convert.ToDouble(Console.ReadLine())); //Добавить в лист число
-        summa += NumbersList[NumbersList.Count - 1]; 
-        //Добавить число к сумме из листа
-        NumbersList[NumbersList.Count - 1]=
-            NumbersList[NumbersList.Count - 1] *
-            NumbersList[NumbersList.Count - 1]; 
-        //Сделать квадрат числа из листа
-    }
-    for (int i = 0; i < NumbersList.Count; i++) //цикл для создания суммы всех квадратов
-    {
-        summa += NumbersList[i];
-    }
-    Console.WriteLine(summa);
-}
 
 try
 {
-    Console.WriteLine("Задача необязательная");
-    SquareTableWithSumma();
+    Console.WriteLine("Задача 25: ");
+    Console.WriteLine(stepen());
+    Console.WriteLine("Задача 27: ");
+    Console.WriteLine(summaNumbers());
+    Console.WriteLine("Задача 29: ");
+    createMassive(8);
+    Console.WriteLine("Задача необязательная: ");
+    createMassiveAndSort();
 }
 catch
 {
