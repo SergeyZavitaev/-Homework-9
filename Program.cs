@@ -1,60 +1,96 @@
-﻿//Задача 25: Напишите цикл,
-//который принимает на вход два числа
-//(A и B) и возводит число A в
-//натуральную степень B.
-//3, 5 -> 243 (3⁵)
-//2, 4-> 16
-Random rd = new Random();
+﻿Random rd = new Random();
 
-int stepen()
-{
-    Console.Write("Введите число: ");
-    int input1 = Convert.ToInt32(Console.ReadLine());
-    Console.Write("Введите степень: ");
-    int input2 = Convert.ToInt32(Console.ReadLine());
-    int otvet = 1;
-    for (int i = 0; i < input2; i++)
-    {
-        otvet = otvet * input1;
-    }
-    return otvet;
-}
-
-//Задача 27: Напишите программу,
-//которая принимает на вход число
-//и выдаёт сумму цифр в числе.
-//452 -> 11
-//82 -> 10
-//9012 -> 12
-
-int summaNumbers()
-{
-    Console.Write("Введите число: ");
-    string str = Console.ReadLine();
-    char[] array = str.ToCharArray();
-    int summa = 0;
-    foreach (char i in array)
-    {
-        summa += Convert.ToInt32(char.ToString(i));
-    }
-    return summa;
-}
-
-//Задача 29: Напишите программу,
-//которая задаёт массив из 8
-//элементов и выводит их на экран.
-//1, 2, 5, 7, 19 -> [1, 2, 5, 7, 19]
-//6, 1, 33-> [6, 1, 33]
-
-void createMassive(int count)
+//Задача 34: Задайте массив заполненный
+//случайными положительными трёхзначными
+//числами. Напишите программу, которая
+//покажет количество чётных чисел в массиве.
+//[345, 897, 568, 234] -> 2
+void countEvenNumbers(int count)
 {
     int[] massive = new int[count];
     for (int i = 0; i < massive.Length; i++)
     {
-        massive[i] = rd.Next(0, 100);
+         massive[i] = rd.Next(100, 1000);
+         Console.Write($"{massive[i]}, ");
+    }
+    //Console.WriteLine("");
+    int otvet = 0;
+    for (int i = 0; i < count; i++)
+    {
+        if (massive[i] % 2==0)
+        {
+            otvet++;
+        }
+    }
+    Console.WriteLine($"-> {otvet}");
+}
+
+//Задача 36: Задайте одномерный массив,
+//заполненный случайными числами.
+//Найдите сумму элементов, стоящих
+//на нечётных позициях.
+//[3, 7, 23, 12] -> 19
+//[-4, -6, 89, 6]-> 0
+
+void summaNotEvenNumbers(int count)
+{
+    int[] massive = new int[count];
+    for (int i = 0; i < massive.Length; i++)
+    {
+        massive[i] = rd.Next(-50, 100);
         Console.Write($"{massive[i]}, ");
     }
-    Console.WriteLine("");
+    
+    int summa = 0;
+    for (int i = -1; i < count; i++)
+    {
+        if (i % 2 == 0)
+        {
+            summa=summa+massive[i+1];
+        }
+    }
+    Console.WriteLine($"-> {summa}");
+}
+
+//Задача 38: Задайте массив вещественных чисел.
+//Найдите разницу между максимальным и
+//минимальным элементов массива.
+//[3 7 22 2 78] -> 76
+
+void differenceMaxAndMin(int count)
+{
+    double[] massive = new double[count];
+    for (int i = 0; i < massive.Length; i++)
+    {
+        massive[i] = rd.NextDouble()*1000;
+        Console.Write($"{massive[i]} ");
+    }
+
+    //max
+    double max = massive[0];
+    int maxIndex = 0;
+    for (int i = 0; i < massive.Length; i++)
+    {
+        if (massive[i] > max)
+        {
+            max = massive[i];
+            maxIndex = i;
+        }
+    }
+
+    //min
+    double min = massive[0];
+    int minIndex = 0;
+    for (int i = 0; i < massive.Length; i++)
+    {
+        if (massive[i] < max)
+        {
+            min = massive[i];
+            minIndex = i;
+        }
+    }
+
+    Console.WriteLine($"-> {max-min}");
 }
 
 //необязательная задача Написать программу
@@ -107,14 +143,12 @@ void createMassiveAndSort()
 
 try
 {
-    Console.WriteLine("Задача 25: ");
-    Console.WriteLine(stepen());
-    Console.WriteLine("Задача 27: ");
-    Console.WriteLine(summaNumbers());
-    Console.WriteLine("Задача 29: ");
-    createMassive(8);
-    Console.WriteLine("Задача необязательная: ");
-    createMassiveAndSort();
+    Console.WriteLine("Задача 34: ");
+    countEvenNumbers(4);
+    Console.WriteLine("Задача 36: ");
+    summaNotEvenNumbers(4);
+    Console.WriteLine("Задача 38: ");
+    differenceMaxAndMin(5);
 }
 catch
 {
