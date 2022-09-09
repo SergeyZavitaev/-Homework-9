@@ -93,54 +93,6 @@ void differenceMaxAndMin(int count)
     Console.WriteLine($"-> {max-min}");
 }
 
-//необязательная задача Написать программу
-//сортировки массива от большего к меньшему.
-//Массив задается размерностью N с клавиатуры,
-//далее заполняется случайными целыми числами.
-
-void createMassiveAndSort()
-{
-    Console.Write("Введите число для установки размера массива: ");
-    int N = Convert.ToInt32(Console.ReadLine()); //Получить N
-    int[] massive = new int[N]; //создать массив размером N
-    for (int i = 0; i < massive.Length; i++) // цикл на весь массив
-    {
-        massive[i] = rd.Next(0, 100); //заполнение случайным числом
-        Console.Write($"{massive[i]}, "); //распечатка элемента массива
-    }
-    Console.WriteLine(""); //отступ так как там был write
-
-    bool sort = false; //переменная, которая сообщает нужно ли ещё сортировать или готово
-    while (sort == false) //цикл пока не отсортирует
-    {
-        for (int i = 1; i < massive.Length; i++) //цикл на весь массив
-        {
-            if (massive[i] > massive[i - 1]) //замена значений если одно больше другого от большего к меньшему
-            {
-                int newValue = massive[i - 1];
-                massive[i - 1] = massive[i];
-                massive[i] = newValue;
-            }
-        }
-
-        bool error = false; //переменная на проверки есть ли ошибки или готово
-        for (int i = 1; i < massive.Length; i++) //цикл на массив
-        {
-            if (massive[i] > massive[i - 1]) //проверка значений
-            {
-                error = true; // если ли есть проблемы, то ставим что ошибка есть
-            }
-        }
-        if (error == false) //если ошибок не найдено значит отсортировано
-        {
-            sort = true;
-        }
-    }
-    var str = string.Join(", ", massive); //распечатка массива
-    Console.WriteLine(str);
-}
-
-
 try
 {
     Console.WriteLine("Задача 34: ");
