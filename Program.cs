@@ -1,81 +1,175 @@
 ﻿Random rd = new Random();
 
-//Задача 41: Пользователь вводит
-//с клавиатуры M чисел. Посчитайте
-//, сколько чисел больше 0
-//ввёл пользователь.
-//5
-//0, 7, 8, -2, -2 -> 2
-//1, -7, 567, 89, 223-> 3
-void Mchisel()
-{
-    List<int> ListOfElements = new List<int>();
-    int input = 0;
+//Задача 47. Задайте двумерный массив
+//размером m×n, заполненный случайными
+//вещественными числами.
+//m = 3, n = 4.
+//0,5 7 - 2 - 0,2
+//1 - 3,3 8 - 9,9
+//8 7,8 - 7,1 9
 
-    bool stopGive = false; //переменная, которая сообщает нужно ли ещё сортировать или готово
-    while (stopGive == false) //цикл пока не отсортирует
+void CreateAndPrint2dMassive()
+{
+    Console.WriteLine("Введите количество строк двумерного массива ");
+    int m = Convert.ToInt32(Console.ReadLine());
+    Console.WriteLine("Введите количество столбцов двумерного массива ");
+    int n = Convert.ToInt32(Console.ReadLine());
+    double[,] FillArray(int m, int n)
     {
+        double[,] array = new double[m, n];
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                array[i, j] = rd.NextDouble()*(100-0);
+            }
+        }
+        return array;
+
+    }
+    void PrintArray(double[,] table)
+    {
+        for (int i = 0; i < table.GetLength(0); i++)
+        {
+            for (int j = 0; j < table.GetLength(1); j++)
+            {
+                Console.Write(table[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    double[,] mas = FillArray(m, n);
+    PrintArray(mas);
+}
+
+//Задача 50.Напишите программу,
+//которая на вход принимает позиции
+//элемента в двумерном массиве, и
+//возвращает значение этого элемента
+//или же указание, что такого элемента нет.
+//Например, задан массив:
+//1 4 7 2
+//5 9 2 3
+//8 4 2 4
+//17->такого числа в массиве нет
+
+void ThereElementPositionInMassive()
+{
+    //Console.WriteLine("Введите количество строк двумерного массива ");
+    int m = 3;//Convert.ToInt32(Console.ReadLine());
+    //Console.WriteLine("Введите количество столбцов двумерного массива ");
+    int n = 4;//Convert.ToInt32(Console.ReadLine());
+
+    int[,] FillArray(int m, int n)
+    {
+        int[,] array = new int[m, n];
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                array[i, j] = rd.Next(100, 1000);
+            }
+        }
+        return array;
+
+    }
+    void TestArray(int[,] table)
+    {
+        List<int> NumbersList = new List<int>();
+        for (int i = 0; i < table.GetLength(0); i++)
+        {
+            for (int j = 0; j < table.GetLength(1); j++)
+            {
+                NumbersList.Add(table[i, j]);
+                Console.Write(table[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+
+        Console.Write("Введите позицию: ");
+        int TestIndex = Convert.ToInt32(Console.ReadLine());
         try
         {
-            Console.Write("");
-            input = Convert.ToInt32(Console.ReadLine());
-            if (input > 0)
-            {
-                ListOfElements.Add(input);
-            }
+            Console.WriteLine($" -> {NumbersList[TestIndex-1]}");
         }
         catch
         {
-            string inputStr = Console.ReadLine();
-            if (inputStr == "")
-            {
-                stopGive = true;
-            }
+            Console.WriteLine(" -> такого числа в массиве нет");
         }
     }
-
-    int[] massive = ListOfElements.ToArray();
-    for (int i = 0; i < massive.Length; i++)
-    {
-         massive[i] = rd.Next(100, 1000);
-         Console.Write($"{massive[i]}, ");
-    }
-    Console.WriteLine($"-> {ListOfElements.Count}");
+    int[,] massive = FillArray(m, n);
+    TestArray(massive);
 }
 
-//Задача 43: Напишите программу,
-//которая найдёт точку пересечения
-//двух прямых, заданных уравнениями
-//y = k1 * x + b1, y = k2 * x + b2;
-//значения b1, k1, b2 и k2 задаются пользователем.
-//b1 = 2, k1 = 5, b2 = 4, k2 = 9-> (-0, 5; -0,5)
+//Задача 52.Задайте двумерный
+//массив из целых чисел.
+//Найдите среднее арифметическое
+//элементов в каждом столбце.
+//Например, задан массив:
+//1 4 7 2
+//5 9 2 3
+//8 4 2 4
+//Среднее арифметическое каждого столбца:
+//4,6; 5,6; 3,6; 3.
 
-void TwoLinesCrossing()
+void AverageOfColumn()
 {
-    double[] coords = new double[6];
-    double giveOtvetDoub(string message)
+    int m = 3;
+    int n = 3;
+
+    int[,] FillArray(int m, int n)
     {
-        Console.Write(message);
-        return Convert.ToDouble(Console.ReadLine());
+        int[,] array = new int[m, n];
+        for (int i = 0; i < m; i++)
+        {
+            for (int j = 0; j < n; j++)
+            {
+                array[i, j] = rd.Next(100, 1000);
+            }
+        }
+        return array;
+
     }
-    coords[0] = giveOtvetDoub("Введите координату b1: "); //b1
-    coords[1] = giveOtvetDoub("Введите координату k1: "); //k1
-    coords[2] = giveOtvetDoub("Введите координату b2: "); //b2
-    coords[3] = giveOtvetDoub("Введите координату k2: "); //k2
-
-    coords[4] = -1 * ((coords[0] - coords[2]) / (coords[1] - coords[3]));
-    coords[5] = -1 * (coords[1]*( -1 * coords[4]) - coords[0]);
-
-    Console.Write(coords[4].ToString());
-    Console.Write(coords[5].ToString());
-    int input = 0;
+    void PrintArray(int[,] table)
+    {
+        for (int i = 0; i < table.GetLength(0); i++)
+        {
+            for (int j = 0; j < table.GetLength(1); j++)
+            {
+                Console.Write(table[i, j] + "\t");
+            }
+            Console.WriteLine();
+        }
+    }
+    void AverageArraysColumns(int[,] table)
+    {
+        List<double> NumbersList = new List<double>();
+        double summa = 0;
+        for (int j = 0; j < table.GetLength(1); j++) //j это строки
+        {
+            for (int i = 0; i < table.GetLength(0); i++) //i это столбцы
+            {
+                summa += (table[i, j]);
+            }
+            NumbersList.Add(summa / table.GetLength(1));
+            summa = 0;
+        }
+        var str = string.Join(", ", NumbersList.ToArray());
+        Console.WriteLine($"Среднее арифметическое каждого столбца: {str}");
+    }
+    int[,] massive = FillArray(m, n);
+    PrintArray(massive);
+    AverageArraysColumns(massive);
 }
+
 try
 {
-    Console.WriteLine("Задача 41: ");
-    Mchisel();
-    Console.WriteLine("Задача 43: ");
-    TwoLinesCrossing();
+    Console.WriteLine("Задача 47: ");
+    CreateAndPrint2dMassive();
+    Console.WriteLine("Задача 50: ");
+    ThereElementPositionInMassive();
+    Console.WriteLine("Задача 52: ");
+    AverageOfColumn();
 }
 catch
 {
